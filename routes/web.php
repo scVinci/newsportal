@@ -30,6 +30,10 @@ Route::prefix('/admin')->group(function(){
         Route::delete('/delete/{category}', [\App\Http\Controllers\Admin\Categories\CategoriesController::class, 'destroy'])->name('admin.categories.delete');
 
     });
+    Route::prefix('/posts')->group(function(){
+        Route::get('/',[\App\Http\Controllers\Admin\PostController::class, 'index'] )->name('admin.posts.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\PostController::class, 'create'] )->name('admin.posts.create');
+    });
 });
 
 Auth::routes();
