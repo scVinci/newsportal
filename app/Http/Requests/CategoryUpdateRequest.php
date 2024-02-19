@@ -23,13 +23,11 @@ class CategoryUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->category->id;
-
-        //dd($id);
         return [
+            'parent_id' => 'integer',
             'title' => 'required|max:255',
             'description' => 'required|max:255',
-            'slug' => 'required|unique:categories,slug,'.$id
+            'slug' => 'required|unique:categories,slug,'.$this->category->id
         ];
     }
 }

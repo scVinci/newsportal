@@ -15,6 +15,17 @@
             <form action="{{route('admin.categories.update', $category->id)}}" class="contact_form" method="post">
                 @csrf
                 @method('put')
+                <select class="form-control" name="parent_id">
+                    <option value="0">Main category</option>
+                    @foreach($categories as $categoryItem)
+                        <option value="{{$categoryItem->id}}"
+                             @if(old('parent_id') == $categoryItem->id || $categoryItem->id == $category->parent_id)
+                                 selected
+                                @endif
+                           >{{$categoryItem->title}}</option>
+                    @endforeach
+                </select>
+                <p></p>
                 <input class="form-control"
                         type="text"
                        placeholder="Назва категорії" name="title"

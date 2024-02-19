@@ -16,9 +16,9 @@
                 @csrf
                 @method('post')
                 <select class="form-control" name="parent_id">
-                    <option></option>
+                    <option value="0">Main category</option>
                     @foreach($categories as $category)
-                    <option value="{{$category->id}}" {{old('parent_id') == $category->id ? 'selected' : '' }}>{{$category->title}}</option>
+                    <option value="{{$category->id}}" {{old('parent_id') == $category->id ? 'selected': '' }}>{{$category->title}}</option>
                     @endforeach
                 </select>
 

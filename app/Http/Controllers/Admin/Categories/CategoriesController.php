@@ -67,7 +67,8 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit', compact('category'));
+        $categories = Category::where('parent_id', '=', 0)->where('id', '!=', $category->id)->get();
+        return view('admin.categories.edit', compact('category', 'categories'));
     }
 
     /**
@@ -92,9 +93,12 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        if($category){
+        if($category && count($category->childs) == 0){
             $category->delete();
             return redirect()->route('admin.categories.index')->with('message', 'Категорю видалено успішна');
+        }
+        if(count($category->childs) > 0){
+            return redirect()->route('admin.categories.index')->with('message', 'Error.Category has subcategori/s');
         }
         return redirect()->route('admin.categories.index')->with('message', 'Категорія відсутня');
     }
