@@ -18,7 +18,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($categoryList as $category)
+                @foreach($mainCategories as $category)
                 <tr>
                     <th scope="row">{{$category->title}}</th>
                     <td>{{$category->title}}</td>
@@ -32,6 +32,9 @@
                             <button type="submit" >Delete</button>
                         </form></td>
                 </tr>
+                    @if(count($category->childs))
+                        @include('admin.categories.childs', ['childs' =>$category->childs])
+                    @endif
                 @endforeach
                 </tbody>
             </table>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
+use Illuminate\Cache\Console\CacheTableCommand;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -17,8 +18,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categoryList = Category::all();
-        return view('admin.categories.index', compact('categoryList'));
+        $mainCategories = Category::where('parent_id', '=', 0)->get();
+        $allCategories = Category::all();
+        return view('admin.categories.index', compact('mainCategories', 'allCategories'));
     }
 
     /**
@@ -28,7 +30,8 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        $categories = Category::where('parent_id', '=', 0)->get();
+        return view('admin.categories.create', compact('categories'));
     }
 
     /**

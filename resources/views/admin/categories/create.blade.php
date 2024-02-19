@@ -15,7 +15,14 @@
             <form action="{{route('admin.categories.store')}}" class="contact_form" method="post">
                 @csrf
                 @method('post')
-                <input class="form-control @error('title') is-invalid @enderror" type="text" placeholder="Назва категорії" name="title" value="{{old('title')}}">
+                <select class="form-control" name="parent_id">
+                    <option></option>
+                    @foreach($categories as $category)
+                    <option value="{{$category->id}}" {{old('parent_id') == $category->id ? 'selected' : '' }}>{{$category->title}}</option>
+                    @endforeach
+                </select>
+
+                <input class="form-control" type="text" placeholder="Назва категорії" name="title" value="{{old('title')}}">
 
                 <input class="form-control" type="text" placeholder="Опис категорії" name="description" value="{{old('description')}}">
                 <input class="form-control" type="text" placeholder="Slug категорії" name="slug" value="{{old('slug')}}">
