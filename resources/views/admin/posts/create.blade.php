@@ -15,10 +15,10 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{route('admin.categories.store')}}" class="contact_form" method="post">
+            <form action="{{route('admin.posts.store')}}" class="contact_form" method="post">
                 @csrf
                 @method('post')
-                <select class="form-control" name="parent_id">
+                <select class="form-control" name="category_id">
                     <option value="0">Main category</option>
                     @foreach($categories as $category)
                         <option value="{{$category->id}}" {{old('parent_id') == $category->id ? 'selected': '' }}>{{$category->title}}</option>
@@ -26,7 +26,7 @@
                 </select>
                 <p></p>
                 <input class="form-control" type="text" placeholder="Заголовок" name="title" value="{{old('title')}}">
-                <textarea id="summernote" name="editordata" class="form-control"></textarea>
+                <textarea id="summernote" name="text" class="form-control" ></textarea>
                 <script>
                     $('#summernote').summernote({
                         placeholder: 'Твори тут',
