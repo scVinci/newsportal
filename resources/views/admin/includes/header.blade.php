@@ -7,7 +7,7 @@
                         <li><a href="{{route('admin.index')}}">Головна</a></li>
                         <li><a href="{{route('admin.posts.index')}}">Новини</a></li>
                         <li><a href="{{route('admin.categories.index')}}">Категорії</a></li>
-                        <li><a href="#">Теги</a></li>
+                        <li><a href="{{route('admin.tags.index')}}">Теги</a></li>
                     </ul>
                 </div>
                 <div class="header_top_right">

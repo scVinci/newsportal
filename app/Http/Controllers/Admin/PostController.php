@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PosteStoreRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Services\PostService;
 use Illuminate\Http\Request;
 
@@ -38,8 +39,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return  view('admin.posts.create', compact('categories'));
+        return  view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -55,7 +57,7 @@ class PostController extends Controller
 
         $data['image'] = $this->service->saveImage($data['image']);
 
-       // dd($data['image']);
+
         $description = $data['text'];
         $dom = new \DomDocument();
 
@@ -80,6 +82,7 @@ class PostController extends Controller
         $summernote->category_id = $data['category_id'];
         $summernote->image = $data['image'];
         $summernote->save();
+        $summernote->tags()->attach($data['tags']);
 
         return redirect()->route('admin.posts.index')->with('message', 'Статтю додано успішно');
 

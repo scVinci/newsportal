@@ -36,6 +36,15 @@ Route::prefix('/admin')->group(function(){
         Route::post('/store',[\App\Http\Controllers\Admin\PostController::class, 'store'] )->name('admin.posts.store');
         Route::get('/{post}/show',[\App\Http\Controllers\Admin\PostController::class, 'show'] )->name('admin.posts.show');
     });
+    Route::prefix('/tags')->group(function(){
+        Route::get('/',[\App\Http\Controllers\Admin\TagController::class, 'index'] )->name('admin.tags.index');
+        Route::get('/create',[\App\Http\Controllers\Admin\TagController::class, 'create'] )->name('admin.tags.create');
+        Route::post('/store',[\App\Http\Controllers\Admin\TagController::class, 'store'] )->name('admin.tags.store');
+        Route::get('/{tag}/edit',[\App\Http\Controllers\Admin\TagController::class, 'edit'] )->name('admin.tags.edit');
+        Route::patch('/{tag}/update',[\App\Http\Controllers\Admin\TagController::class, 'update'] )->name('admin.tags.update');
+        Route::delete('/{tag}/delete',[\App\Http\Controllers\Admin\TagController::class, 'destroy'] )->name('admin.tags.delete');
+
+    });
 });
 
 Auth::routes();

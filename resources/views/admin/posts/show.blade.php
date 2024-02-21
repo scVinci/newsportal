@@ -11,8 +11,13 @@
                     <div class="single_page_content"> <img class="img-center" src="{{asset('storage/'.$post->image)}}" alt="">
                         {!! $post->text!!}
 
-
+                        <div class="tags">
+                            @foreach($post->tags as $tag)
+                                #{{$tag->title}}
+                            @endforeach
+                        </div>
                     </div>
+
                     <div class="social_link">
                         <ul class="sociallink_nav">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>

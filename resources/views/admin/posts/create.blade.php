@@ -35,6 +35,11 @@
                         height: 100
                     });
                 </script>
+                <select class="form-control row-cols-4" multiple name="tags[]">
+                    @foreach($tags as $tag)
+                        <option value="{{$tag->id}}">{{$tag->title}}</option>
+                    @endforeach
+                </select>
                 <input type="submit" value="Додати">
             </form>
         </div>
