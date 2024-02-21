@@ -20,7 +20,7 @@
                 <tbody>
                 @foreach($posts as $post)
                     <tr>
-                        <th scope="row">{{$post->title}}</th>
+                        <th scope="row"><a href="{{route('admin.posts.show', $post->id)}}">{{$post->title}}</a> </th>
                         <td>{{$post->title}}</td>
                         <td>$post</td>
                         <td><a href="{{route('admin.categories.edit', $post->id)}}">редагувати</a> /

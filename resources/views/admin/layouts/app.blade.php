@@ -5,15 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/font.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/li-scroller.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/slick.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.fancybox.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/theme.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <!--[if lt IE 9]>
     <script src="{{asset('assets/js/html5shiv.min.js')}}"></script>
     <script src="{{asset('assets/js/respond.min.js')}}"></script>
@@ -28,6 +19,16 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     @yield('script-section')
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/font.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/li-scroller.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/slick.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.fancybox.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/theme.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
+
 </head>
 <body>
 <div id="preloader">
@@ -36,7 +37,12 @@
 <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
 <div class="container">
     @include('admin.includes.header')
-    @yield('content')
+    <section id="contentSection">
+        <div class="row">
+
+            @yield('content')
+        </div>
+    </section>
     @include('admin.includes.footer')
 </div>
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>

@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PosteStoreRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Services\PostService;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    private $service;
+
+    public function __construct()
+    {
+        $this->service = new PostService();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,15 +48,15 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(PosteStoreRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'text' => 'required',
-            'category_id'
-        ]);
+        $data = $request->validated();
 
-        $description = $request->text;
+
+        $data['image'] = $this->service->saveImage($data['image']);
+
+       // dd($data['image']);
+        $description = $data['text'];
         $dom = new \DomDocument();
 
         $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
@@ -65,10 +75,10 @@ class PostController extends Controller
         }
         $description = $dom->saveHTML();
         $summernote = new Post;
-        $summernote->title = $request->title;
+        $summernote->title = $data['title'];
         $summernote->text = $description;
-        $summernote->category_id = $request->category_id;
-        $summernote->image = 'asad';
+        $summernote->category_id = $data['category_id'];
+        $summernote->image = $data['image'];
         $summernote->save();
 
         return redirect()->route('admin.posts.index')->with('message', 'Статтю додано успішно');
@@ -82,9 +92,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('admin.posts.show', compact('post'));
     }
 
     /**

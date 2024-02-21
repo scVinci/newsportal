@@ -34,6 +34,7 @@ Route::prefix('/admin')->group(function(){
         Route::get('/',[\App\Http\Controllers\Admin\PostController::class, 'index'] )->name('admin.posts.index');
         Route::get('/create',[\App\Http\Controllers\Admin\PostController::class, 'create'] )->name('admin.posts.create');
         Route::post('/store',[\App\Http\Controllers\Admin\PostController::class, 'store'] )->name('admin.posts.store');
+        Route::get('/{post}/show',[\App\Http\Controllers\Admin\PostController::class, 'show'] )->name('admin.posts.show');
     });
 });
 

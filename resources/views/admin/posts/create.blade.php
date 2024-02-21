@@ -15,9 +15,10 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{route('admin.posts.store')}}" class="contact_form" method="post">
+            <form action="{{route('admin.posts.store')}}" class="contact_form" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('post')
+                <input class="form-control" type="file" name="image">
                 <select class="form-control" name="category_id">
                     <option value="0">Main category</option>
                     @foreach($categories as $category)
