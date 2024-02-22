@@ -32,9 +32,11 @@ Route::prefix('/admin')->group(function(){
     });
     Route::prefix('/posts')->group(function(){
         Route::get('/',[\App\Http\Controllers\Admin\PostController::class, 'index'] )->name('admin.posts.index');
+        Route::get('/{post}/show',[\App\Http\Controllers\Admin\PostController::class, 'show'] )->name('admin.posts.show');
         Route::get('/create',[\App\Http\Controllers\Admin\PostController::class, 'create'] )->name('admin.posts.create');
         Route::post('/store',[\App\Http\Controllers\Admin\PostController::class, 'store'] )->name('admin.posts.store');
-        Route::get('/{post}/show',[\App\Http\Controllers\Admin\PostController::class, 'show'] )->name('admin.posts.show');
+        Route::get('/edit/{post}',[\App\Http\Controllers\Admin\PostController::class, 'edit'] )->name('admin.posts.edit');
+        Route::patch('/update/{post}',[\App\Http\Controllers\Admin\PostController::class, 'update'] )->name('admin.posts.update');
     });
     Route::prefix('/tags')->group(function(){
         Route::get('/',[\App\Http\Controllers\Admin\TagController::class, 'index'] )->name('admin.tags.index');

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PosteStoreRequest extends FormRequest
+class PostUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,11 @@ class PosteStoreRequest extends FormRequest
     {
         return [
             'category_id' => 'required|integer|exists:categories,id',
-            'image' => 'required',
+            'image' => 'nullable',
             'title' => 'required|string',
             'text' => 'required',
             'tags' => 'nullable|array',
             'tags.*' => 'integer'
-
         ];
     }
 }

@@ -13,7 +13,7 @@
                 <tr>
                     <th scope="col">Назва</th>
                     <th scope="col">Автор</th>
-                    <th scope="col">Slug</th>
+                    <th scope="col">Дата</th>
                     <th scope="col">Опції</th>
                 </tr>
                 </thead>
@@ -22,18 +22,31 @@
                     <tr>
                         <th scope="row"><a href="{{route('admin.posts.show', $post->id)}}">{{$post->title}}</a> </th>
                         <td>{{$post->title}}</td>
-                        <td>$post</td>
-                        <td><a href="{{route('admin.categories.edit', $post->id)}}">редагувати</a> /
-                            <form action="{{ route('admin.categories.delete', $post->id) }}" method="POST">
+                        <td>{{$post->created_at}}</td>
+                        <td>
+                            <a href="{{route('admin.posts.edit', $post->id)}}">редагувати</a> /
+                            <button type="submit" form="delete{{$post->id}}">Delete</button>
+                            <form action="{{ route('admin.categories.delete', $post->id) }}" method="POST" id="delete{{$post->id}}">
                                 @csrf
-
                                 @method('DELETE')
-                                <button type="submit" >Delete</button>
                             </form></td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
+            Сторінка {{$posts->currentPage()}} з {{$posts->lastPage()}}
+            {{ $posts->onEachSide(5)->links() }}
+            @if($posts->currentPage() == 1)
+                << Попередня
+                @else
+                <a href="{{$posts->nextPageUrl()}}" title="Попередня"><< Попередня</a>
+            @endif
+            {{$posts->currentPage()}}
+            @if($posts->lastPage() == $posts->currentPage())
+                Наступна >>
+            @else
+                <a href="{{$posts->nextPageUrl()}}" title="Попередня">Наступна >></a>
+            @endif
         </div>
     </section>
 @endsection

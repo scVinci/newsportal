@@ -4,6 +4,12 @@
             <div class="left_content">
                 <div class="single_page">
                    <h1>{{$post->title}}</h1>
+                    <a href="{{route('admin.posts.edit', $post->id)}}">редагувати</a> /
+                    <button type="submit" form="delete{{$post->id}}">Delete</button>
+                    <form action="{{ route('admin.categories.delete', $post->id) }}" method="POST" id="delete{{$post->id}}">
+                        @csrf
+                        @method('DELETE')
+                    </form>
                     <div class="post_commentbox">
                         <span><i class="fa fa-calendar"></i>{{$post->created_at}}</span>
                         <a href="#"><i class="fa fa-tags"></i>{{$post->category->title}}</a>
