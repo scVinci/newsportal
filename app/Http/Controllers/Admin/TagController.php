@@ -89,7 +89,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        if(count($tag->posts()) > 0){
+        if($tag->posts()->count()>0){
             return redirect()->route('admin.tags.index')->with('message', 'Тег закріплений за статтею');
         }else{
             $tag->delete();

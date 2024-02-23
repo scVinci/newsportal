@@ -15,7 +15,7 @@ class Post extends Model
     /**
      * @var mixed
      */
-    protected $fillable = ['title', 'image', 'text', 'category_id'];
+    protected $fillable = ['title', 'image', 'text', 'category_id', 'slug'];
 
     public function category(): HasOne
     {

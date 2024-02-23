@@ -1,8 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
-    <section id="newsSection">
-        <div class="row">
-            <h1>Новий тег</h1>
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">New tag</h6>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul class="list-unstyled">
@@ -12,14 +11,25 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{route('admin.tags.store')}}" class="contact_form" method="post">
+            <form action="{{route('admin.tags.store')}}" method="post">
                 @csrf
-                @method('post')
-
-                <input class="form-control" type="text" placeholder="Назва тегу" name="title" value="{{old('title')}}">
-                <input class="form-control" type="text" placeholder="Slug тегу" name="slug" value="{{old('slug')}}">
-                <input type="submit" value="Створити">
+                @method('POST')
+                <div class="mb-3">
+                    <label for="title" class="form-label">Tag title</label>
+                    <input type="text" class="form-control" id="title"
+                        value="{{old('title')?old('title'):''}}"
+                           name="title"
+                    >
+                </div>
+                <div class="mb-3">
+                    <label for="slug" class="form-label">Slug</label>
+                    <input type="text" class="form-control" id="slug"
+                           value="{{old('slug')?old('slug'):''}}"
+                           name="slug"
+                    >
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>
-    </section>
 @endsection
+

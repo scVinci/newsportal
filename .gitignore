@@ -16,3 +16,4 @@ yarn-error.log
 /public/upload
 .env
 /database/database.sqlite
+/resources/views/admin-v1

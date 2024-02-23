@@ -1,46 +1,57 @@
 @extends('admin.layouts.app')
 @section('content')
-    <section id="newsSection">
-        <div class="row">
-            <h1>Редагувати категорію</h1>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="list-unstyled">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <form action="{{route('admin.categories.update', $category->id)}}" class="contact_form" method="post">
-                @csrf
-                @method('put')
-                <select class="form-control" name="parent_id">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Edit category</h6>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="list-unstyled">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{route('admin.categories.update', $category->id)}}" method="post">
+            @csrf
+            @method('PATCH')
+            <div class="mb-3">
+                <label for="title" class="form-label">Category title</label>
+                <input type="text" class="form-control" id="title"
+                       value="{{old('title')?old('title'):$category->title}}"
+                       name="title"
+                >
+            </div>
+            <div class="mb-3">
+                <label for="parent_id" class="form-label">Parent title</label>
+                <select class="form-select" id="parent_id" aria-label="Floating label select example" name="parent_id">
                     <option value="0">Main category</option>
-                    @foreach($categories as $categoryItem)
-                        <option value="{{$categoryItem->id}}"
-                             @if(old('parent_id') == $categoryItem->id || $categoryItem->id == $category->parent_id)
-                                 selected
-                                @endif
-                           >{{$categoryItem->title}}</option>
+                    @foreach($categories as $cat)
+                        <option value="{{$cat->id}}"
+                            {{
+                                old('parent_id')?
+                                (old('parent_id') == $cat->id?'selected':''):
+                                ($cat->id == $category->parent_id?'selected':'')}}
+                        >{{$cat->title}}</option>
                     @endforeach
                 </select>
-                <p></p>
-                <input class="form-control"
-                        type="text"
-                       placeholder="Назва категорії" name="title"
-                       value="{{old('title')? old('title') : $category->title}}">
+            </div>
 
-                <input class="form-control"
-                       type="text"
-                       placeholder="Опис категорії" name="description"
-                       value="{{old('description')? old('description') : $category->description}}">
-                <input class="form-control"
-                       type="text"
-                       placeholder="Slug категорії" name="slug"
-                       value="{{old('slug')? old('slug') : $category->slug}}">
-                <input type="submit" value="Зберегти">
-            </form>
-        </div>
-    </section>
+            <div class="mb-3">
+                <label for="slug" class="form-label">Slug</label>
+                <input type="text" class="form-control" id="slug"
+                       value="{{old('slug')?old('slug'):$category->slug}}"
+                       name="slug"
+                >
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description"
+                       value="{{old('description')?old('description'):$category->slug}}"
+                       name="description"
+                >
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
 @endsection
+
